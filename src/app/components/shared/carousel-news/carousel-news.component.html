@@ -1,0 +1,25 @@
+<div class="container-fluid container-news">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+                <h5 class="text-center">Noticias</h5>
+                <p class="text-center loader" [hidden]="!loading">
+                    <fa name="spinner" animation="pulse" size="3x"></fa>
+                </p>
+
+                <swiper [config]="config" [hidden]="loading" class="swiper-container"  [config]="config" >
+                    <div *ngFor="let post of posts | async" lazy-load-images class="swiper-slide card">
+                            <img class="card-img-top" [src]="post.photoURL" alt="Card image cap" widt>
+                            <div class="card-body">
+        
+                                <h5 class="card-title text-center">{{ post.title | slice:0:25 }}</h5>
+                                <p class="card-text" [innerHTML]="post?.content | slice:0:80">...</p>
+                                <a [routerLink]="['/post-view',post.key]" class="btn btn-primary">Ver más</a>
+                            </div>
+                    </div>
+                </swiper>
+                        
+        
+        
+            </div>
+    </div>
+</div>

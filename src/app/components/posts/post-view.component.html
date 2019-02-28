@@ -1,0 +1,24 @@
+<div class="container-fluid home-main-header"></div>
+<div class="container-fluid post-view">
+  <div class="row">
+    <div class="col-md-10 offset-md-1" >
+      <h4 class="text-center">{{ post?.title }}</h4>
+      <hr>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <img src="{{post?.photoURL}}" alt="{{post?.title}}" class="img-fluid">
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="text-left" [innerHTML]="post?.content">
+        
+        <!-- <p>{{post?.content}}</p> -->
+      </div>
+      
+
+      
+    </div>
+  </div>
+</div>
+<app-carousel-news></app-carousel-news>

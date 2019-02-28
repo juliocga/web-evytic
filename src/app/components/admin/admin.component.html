@@ -1,0 +1,33 @@
+<div class="container admin-page">
+    
+<div class="row" *ngIf="afAuth.user | async as user">
+        <!-- <div class="col-md-2">
+            <img src="{{user.photoURL}}" alt="" width="100" class="img-fluid news">
+        </div>
+        <div class="col-md-10">
+            <h3>{{ user.displayName }}</h3>
+        </div> -->
+
+    <div class="row animated fadeIn fast">
+        <div class="col-md-12 text-right">
+        <button [routerLink]="['/post','nuevo']" class="btn btn-outline-primary">Nueva noticia</button>
+        </div>
+    </div>
+    <br>
+        
+        <div class="col-md-12">
+            <h3>Noticias</h3>
+    
+        </div>
+    </div>
+    <div class="row" *ngIf="!afAuth.user">
+            <p>Please login.</p>
+            <button (click)="login()" class="btn btn-outline-primary">Login with Google</button>
+    </div>
+    
+</div>
+<div class="row">
+
+    <app-posts-list></app-posts-list>
+
+</div>

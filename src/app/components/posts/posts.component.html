@@ -1,0 +1,55 @@
+<div class="container posts">
+
+
+    <div class="row animated fadeIn fast" *ngIf="afAuth.user| async as user; else showLogin">
+        <div class="col-md-12">
+            <h1>Noticias</h1>
+            <br>
+        </div>
+        <div class="col-md-4 text-left offset-md-1">
+            <button (click)="logout()" class="btn btn-outline-danger">Cerrar Cesión</button>
+        </div>
+        <div class="col-md-4 text-right offset-md-2">
+
+            <button [routerLink]="['/post','nuevo']" class="btn btn-outline-primary">Nueva noticia</button>
+        </div>
+        <br>
+        <br>
+        <div class="table-responsive col-md-10 offset-md-1">
+            <table class="table">
+                <thead class="text-light bg-danger">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Título de la noticia</th>
+                        <th scope="col">Última modificación</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let post of posts | async; index as i ">
+                        <td>{{i + 1}}</td>
+                        <td><strong>{{ post.title | slice:0:25 }}...</strong></td>
+                        <td>
+                            <p *ngIf="post.lastModifiedDate"> {{ post.lastModifiedDate | date:'short' }}</p>
+                            <p *ngIf="!post.lastModifiedDate">----</p>
+                        </td>
+                        <td>
+                            <a [routerLink]="['/post-view',post.key]" class="btn btn-outline-primary btn-sm">Ver</a>
+                            
+                            <a [routerLink]="['/post',post.key]" class="btn btn-outline-warning btn-sm" *ngIf="postService.canEdit">Editar</a>
+                            <button class="btn btn-outline-danger btn-sm" type="button" *ngIf="postService.canDelete" (click)="deletePost(post.key)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <ng-template #showLogin>
+        <div class="row">
+            <p>Please login.</p>
+            <button (click)="login()" class="btn btn-outline-primary">Login with Google</button>
+        </div>
+    </ng-template>
+
+    <br>
+</div>

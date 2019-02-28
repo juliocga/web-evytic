@@ -1,0 +1,45 @@
+<div class="container admin-page">
+
+
+    <div class="row animated fadeIn fast">
+        <div class="col-md-3 offset-md-3 text-left">
+            <button class="btn btn-outline-danger" [routerLink]="['/posts']">Regresar</button>
+        </div>
+        <div class="col-md-3 text-right">
+            <button (click)="agregarNuevo(forma)" class="btn btn-outline-primary" type="button">Nueva noticia</button>
+        </div>
+        <div class="col-md-6 offset-md-3">
+            <h2>Nueva noticia</h2>
+            <form (ngSubmit)="guardar(forma.value, fileInput)" #forma="ngForm" >
+                <div class="form-group">
+                    <label for="">Título</label>
+                    <input [(ngModel)]="post.title"  name="title" type="text" class="form-control" placeholder="Título de la noticia" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Imagen</label>
+                    <br>
+                    <input type="file" name="photoURL" #fileInput>
+                    <div>{{ postService.uploadPercent | async }}</div>
+                    <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Contenido</label>
+                    <textarea ngxTrumbowygEditor name="editorDirective" [(ngModel)]="post.content" name="content" ></textarea>
+                </div>
+                
+
+                <div class="form-group">
+                    <button [disabled]="!forma.valid" type="submit" name="button" class="btn btn-outline-primary">Guardar cambios</button>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': uploadPercent + '%' }"></div>
+                    
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
